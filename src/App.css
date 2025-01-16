@@ -1,0 +1,59 @@
+.App {
+  text-align: center;
+  font-family: Arial, sans-serif;
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
+
+.vehicle-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin: 1rem 0;
+}
+
+.vehicle-form input {
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1rem;
+  width: 300px;
+}
+
+.vehicle-form button {
+  padding: 0.5rem;
+  background-color: #61dafb;
+  border: none;
+  border-radius: 5px;
+  color: black;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.vehicle-form button:hover {
+  background-color: #21a1f1;
+}
+
+.vehicle-data {
+  margin-top: 2rem;
+  text-align: left;
+  /* max-width: 600px; */
+  background-color: #1c2025;
+  padding: 1rem;
+  border-radius: 5px;
+  color: #eee;
+  overflow-x: auto;
+}
+
+.vehicle-data pre {
+  font-family: "Courier New", Courier, monospace;
+}
