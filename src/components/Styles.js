@@ -43,10 +43,16 @@ function Styles({ fetchVehicleDataForAllData }) {
 				/>
 				<button type="submit">Fetch Vehicle Data</button>
 			</form>
-			{vehicleDataYMM ? (
-				<div className="vehicle-data">
+			{vehicleDataYMM &&
+			Array.isArray(vehicleDataYMM.styles) &&
+			vehicleDataYMM.styles.length > 0 ? (
+				<div>
 					<h2>Lookup by YMM:</h2>
-					<pre>{JSON.stringify(vehicleDataYMM, null, 2)}</pre>
+					{vehicleDataYMM.styles.map((style, idx) => (
+						<div className="vehicle-data" key={style.styleId || idx}>
+							<pre>{JSON.stringify(style, null, 2)}</pre>
+						</div>
+					))}
 				</div>
 			) : (
 				<p>No data available</p>
