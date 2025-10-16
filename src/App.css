@@ -110,3 +110,92 @@
 	background-color: #21a1f1;
 	color: white;
 }
+
+.style-block-wrapper {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 2rem;
+	justify-content: center;
+	margin-top: 2rem;
+}
+
+.vehicle-style-card {
+	background: linear-gradient(135deg, #23272c 70%, #61dafb 100%);
+	border-radius: 12px;
+	box-shadow: 0 4px 16px rgba(33, 161, 241, 0.12);
+	margin-bottom: 2rem;
+	padding: 1.5rem;
+	width: 340px;
+	transition: transform 0.2s, box-shadow 0.2s;
+	border: 2px solid #282c34;
+}
+
+.vehicle-style-card:hover {
+	transform: scale(1.03);
+	box-shadow: 0 8px 32px rgba(33, 161, 241, 0.18);
+}
+
+.vehicle-style-card-header {
+	display: flex;
+	align-items: center;
+	gap: 1rem;
+	margin-bottom: 1rem;
+}
+
+.car-emoji {
+	font-size: 2rem;
+	margin-right: 0.5rem;
+}
+
+.style-title {
+	font-size: 1.3rem;
+	font-weight: bold;
+	color: #61dafb;
+	text-shadow: 1px 1px 2px #222;
+}
+
+.ymm-table {
+	width: 100%;
+	border-collapse: collapse;
+	background-color: #23272c;
+	color: #eee;
+	border-radius: 8px;
+	overflow: hidden;
+	box-shadow: 0 1px 3px rgba(33, 161, 241, 0.05);
+}
+
+.ymm-table th,
+.ymm-table td {
+	padding: 0.5rem 0.8rem;
+	border-bottom: 1px solid #333;
+	text-align: left;
+}
+
+.ymm-table th {
+	background-color: #282c34;
+	font-weight: bold;
+	width: 120px;
+	color: #61dafb;
+	letter-spacing: 0.5px;
+}
+
+.ymm-table tr:last-child td {
+	border-bottom: none;
+}
+
+@media (max-width: 900px) {
+	.style-block-wrapper {
+		flex-direction: column;
+		gap: 1.5rem;
+	}
+	.vehicle-style-card {
+		width: 90vw;
+		min-width: 220px;
+	}
+}
+
+.form-container {
+	width: 100%;
+	display: flex;
+	justify-content: center;
+}
