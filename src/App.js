@@ -369,7 +369,7 @@ function App() {
 		<Router>
 			<div className="App">
 				<header className="App-header">
-					<p className="version">Version 2.0</p>
+					<p className="version">Version 2.1</p>
 					<nav className="nav-bar">
 						<Link className="nav-button" to="/">
 							Home
