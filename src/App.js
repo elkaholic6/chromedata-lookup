@@ -42,6 +42,15 @@ function App() {
 		);
 	}
 
+	/**
+	 * The Following functions fetch vehicle data for the Home page
+	 * fetchVehicleData(year, makeCode, model)
+	 * fetchVehicleDataWithStyleId(styleId)
+	 * fetchVehicleModels(year, makeCode)
+	 * fetchVehicleMakeCodes(year)
+	 * They return processed data from the API calls.
+	 */
+
 	async function fetchVehicleData(year, makeCode, model) {
 		const encodedModel = encodeURIComponent(model);
 		const apiUrl = `https://vss-api.jdpower.com/VSS/v1.0/styles?makeCode=${makeCode}&model=${encodedModel}&year=${year}`;
@@ -96,39 +105,6 @@ function App() {
 			return {
 				styleIds,
 			};
-		} catch (error) {
-			console.error("Error fetching vehicle data:", error);
-			return "failure";
-		}
-	}
-
-	async function fetchVehicleDataForAllData(year, makeCode, model) {
-		const encodedModel = encodeURIComponent(model);
-		const apiUrl = `https://vss-api.jdpower.com/VSS/v1.0/styles?makeCode=${makeCode}&model=${encodedModel}&year=${year}`;
-
-		try {
-			const authorizationToken = await generateAuthorizationToken();
-			const response = await fetch(apiUrl, {
-				method: "GET",
-				headers: {
-					Authorization: authorizationToken,
-					"Content-Type": "application/json",
-				},
-			});
-
-			if (!response.ok) {
-				throw new Error(`HTTP error! status: ${response.status}`);
-			}
-
-			const data = await response.json();
-			const styleData = data.result;
-
-			if (!styleData) {
-				throw new Error("Invalid or empty response data");
-			}
-
-			// Return the entire result object
-			return styleData;
 		} catch (error) {
 			console.error("Error fetching vehicle data:", error);
 			return "failure";
@@ -242,6 +218,97 @@ function App() {
 		}
 	}
 
+	/**
+	 * The Following functions are passed as props to the Styles component
+	 * fetchVehicleMakeCodesAllData(year)
+	 * fetchVehicleModelsAllData(year, makeCode)
+	 * fetchVehicleDataForAllData(year, makeCode, model)
+	 * They return the full data result from the API calls.
+	 */
+
+	async function fetchVehicleMakeCodesAllData(year) {
+		const apiUrl = `https://vss-api.jdpower.com/VSS/v1.0/makes?year=${year}`;
+
+		try {
+			const authorizationToken = await generateAuthorizationToken();
+			const response = await fetch(apiUrl, {
+				method: "GET",
+				headers: {
+					Authorization: authorizationToken,
+					"Content-Type": "application/json",
+				},
+			});
+
+			if (!response.ok) {
+				throw new Error(`HTTP error! status: ${response.status}`);
+			}
+
+			const data = await response.json();
+			const makeData = data.result;
+			return makeData;
+		} catch (error) {
+			console.error("Error fetching vehicle data:", error);
+		}
+	}
+
+	async function fetchVehicleModelsAllData(year, makeCode) {
+		const apiUrl = `https://vss-api.jdpower.com/VSS/v1.0/models?makeCode=${makeCode}&year=${year}`;
+
+		try {
+			const authorizationToken = await generateAuthorizationToken();
+			const response = await fetch(apiUrl, {
+				method: "GET",
+				headers: {
+					Authorization: authorizationToken,
+					"Content-Type": "application/json",
+				},
+			});
+
+			if (!response.ok) {
+				throw new Error(`HTTP error! status: ${response.status}`);
+			}
+
+			const data = await response.json();
+			const modelData = data.result;
+			return modelData;
+		} catch (error) {
+			console.error("Error fetching vehicle data:", error);
+		}
+	}
+
+	async function fetchVehicleDataForAllData(year, makeCode, model) {
+		const encodedModel = encodeURIComponent(model);
+		const apiUrl = `https://vss-api.jdpower.com/VSS/v1.0/styles?makeCode=${makeCode}&model=${encodedModel}&year=${year}`;
+
+		try {
+			const authorizationToken = await generateAuthorizationToken();
+			const response = await fetch(apiUrl, {
+				method: "GET",
+				headers: {
+					Authorization: authorizationToken,
+					"Content-Type": "application/json",
+				},
+			});
+
+			if (!response.ok) {
+				throw new Error(`HTTP error! status: ${response.status}`);
+			}
+
+			const data = await response.json();
+			const styleData = data.result;
+
+			if (!styleData) {
+				throw new Error("Invalid or empty response data");
+			}
+
+			// Return the entire result object
+			return styleData;
+		} catch (error) {
+			console.error("Error fetching vehicle data:", error);
+			return "failure";
+		}
+	}
+
 	// React state management
 	const [year, setYear] = useState("");
 	const [makeCode, setMakeCode] = useState("");
@@ -346,6 +413,8 @@ function App() {
 							element={
 								<Styles
 									fetchVehicleDataForAllData={fetchVehicleDataForAllData}
+									fetchVehicleModelsAllData={fetchVehicleModelsAllData}
+									fetchVehicleMakeCodesAllData={fetchVehicleMakeCodesAllData}
 								/>
 							}
 						/>
